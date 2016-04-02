@@ -1,12 +1,11 @@
-Nice guides:
+Build and start the docker container using:
 
-- http://book.mixu.net/node/ch6.html
-- https://www.codementor.io/nodejs/tutorial/unit-testing-nodejs-tdd-mocha-sinon
-- http://theholmesoffice.com/how-to-build-a-simple-webpage-in-node-js/
-- http://theholmesoffice.com/getting-ready-for-scalability-creating-an-mvc-framework-for-our-node-js-page/
-- https://github.com/nodejs/node-v0.x-archive/wiki/Installing-Node.js-via-package-manager
+```
+$ docker build -t ngj .
+$ docker run -dp 80:80 -v $(pwd):/app ngj
+```
 
-Docker container notes:
+Manual execution notes:
 
 ```
 apt-get install curl
@@ -15,3 +14,11 @@ apt-get install --yes nodejs
 npm install supervisor -g
 supervisor app.js
 ```
+
+Nice guides:
+
+- http://book.mixu.net/node/ch6.html
+- https://www.codementor.io/nodejs/tutorial/unit-testing-nodejs-tdd-mocha-sinon
+- http://theholmesoffice.com/how-to-build-a-simple-webpage-in-node-js/
+- http://theholmesoffice.com/getting-ready-for-scalability-creating-an-mvc-framework-for-our-node-js-page/
+- https://github.com/nodejs/node-v0.x-archive/wiki/Installing-Node.js-via-package-manager

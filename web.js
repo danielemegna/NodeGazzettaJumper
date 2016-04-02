@@ -1,5 +1,5 @@
 var http = require('http')
-var GazzettaJumper = require('./gazzettaJumper')
+var GazzettaJumper = require('./src/gazzettaJumper')
 
 http.createServer(function(req, res) {
 
