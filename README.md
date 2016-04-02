@@ -5,6 +5,17 @@ $ docker build -t ngj .
 $ docker run -dp 80:80 -v $(pwd):/app ngj
 ```
 
+or for tty interactive mode:
+```
+$ docker run -itp 80:80 -v $(pwd):/app ngj bash
+```
+
+Prepare dev environment using (inside the interactive container):
+```
+$ npm install 
+$ ./mocha tests
+```
+
 Manual execution notes:
 
 ```
