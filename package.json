@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "chai": "^3.5.0",
+    "cheerio": "^0.20.0",
     "mocha": "^2.4.5"
   }
 }
