@@ -3,15 +3,23 @@ var cheerio = require('cheerio');
 
 function UserCloudPage(html) {
 
+  var $cheerioHtml = cheerio.load(html)
+
   this.files = function() {
-    var $html = cheerio.load(html)
-    var files = $html('#xfiles td.strong > a').map(function(i, e) {
-      var text = $html(this).text().trim()
-      var href = $html(this).attr('href')
-      return new UserCloudFile(text, href)
-    }).get()
-    
-    return files
+    var fileLinks = $cheerioHtml('#xfiles td.strong > a')
+    return fileLinks.map(fileLinkToUserCloudFile).get()
+  }
+
+  this.nextPageLink = function() {
+    var nextLink = $cheerioHtml('.paging a:contains("Next")').first();
+    return nextLink.attr('href')
+  }
+
+  var fileLinkToUserCloudFile = function(index, link) {
+    var cheerioLink = $cheerioHtml(link)
+    var text = cheerioLink.text().trim()
+    var href = cheerioLink.attr('href')
+    return new UserCloudFile(text, href)
   }
 }
 
