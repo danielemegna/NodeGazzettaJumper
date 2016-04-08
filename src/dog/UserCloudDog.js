@@ -1,8 +1,7 @@
 var UserCloudDog = function(url, wgetter) {
 	
 	this.find = function() {
-		console.log(wgetter)
-		wgetter.getPage(url)
+		var html = wgetter.getPage(url)
 	}
 }
 

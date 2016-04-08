@@ -16,16 +16,16 @@ describe('UserCloudDog', function() {
   })
 
   it('calls correctly wgetter', function() {
-   	var wgetterInterface = { getPage: function () {} }
-    var wgetter = sinon.mock(wgetterInterface)
 		var url = "http://url.to.usercloud"
+
+   	var wgetter = { getPage: function () {} }
+    var wgetterMock = sinon.mock(wgetter)
+    wgetterMock.expects("getPage").once().withExactArgs(url)
 
     var dog = new UserCloudDog(url, wgetter)
 		dog.find()
 
-    wgetter.expects("getPage").withExactArgs(url).once()
-
-		wgetter.verify()
+		wgetterMock.verify()
   })
 
 })
