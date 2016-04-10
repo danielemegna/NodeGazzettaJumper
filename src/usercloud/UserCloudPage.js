@@ -1,25 +1,31 @@
-var UserCloudFile = require('./UserCloudFile');
+var Link = require('../Link');
 var cheerio = require('cheerio');
 
 function UserCloudPage(html) {
 
   var $cheerioHtml = cheerio.load(html)
 
-  this.files = function() {
-    var fileLinks = $cheerioHtml('#xfiles td.strong > a')
-    return fileLinks.map(fileLinkToUserCloudFile).get()
+  this.linkWithTitle = function(title) {
+    var results = $cheerioHtml('#xfiles td.strong > a:contains("' + title  + '")')
+    if(results.length > 0)
+      return buildLink(results.first())
+
+    return null
   }
 
   this.nextPageLink = function() {
-    var nextLink = $cheerioHtml('.paging a:contains("Next")').first();
-    return nextLink.attr('href')
+    var results = $cheerioHtml('.paging a:contains("Next")')
+    if(results.length > 0)
+      return buildLink(results.first())
+
+    return null
   }
 
-  var fileLinkToUserCloudFile = function(index, link) {
+  var buildLink = function(link) {
     var cheerioLink = $cheerioHtml(link)
     var text = cheerioLink.text().trim()
     var href = cheerioLink.attr('href')
-    return new UserCloudFile(text, href)
+    return new Link(text, href)
   }
 }
 

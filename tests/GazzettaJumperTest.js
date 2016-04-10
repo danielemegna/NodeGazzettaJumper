@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect; // we are using the "expect" style of Chai
 
-var GazzettaJumper = require('../src/gazzettaJumper');
+var GazzettaJumper = require('../src/GazzettaJumper');
 
 describe('Something', function() {
 
