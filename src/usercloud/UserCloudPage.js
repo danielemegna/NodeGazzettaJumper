@@ -25,6 +25,12 @@ function UserCloudPage(html) {
     var cheerioLink = $cheerioHtml(link)
     var text = cheerioLink.text().trim()
     var href = cheerioLink.attr('href')
+
+    if(href.indexOf("userscloud.com") < 0)
+      href = "//userscloud.com" + href
+    if(href.indexOf("http") != 0)
+      href = "http:" + href
+
     return new Link(text, href)
   }
 }

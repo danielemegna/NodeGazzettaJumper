@@ -8,8 +8,10 @@ var Dog = function(enterUrl, pageFactory, wgetter) {
       var page = pageFactory.build(html)
       var gazzettaLink = page.linkWithTitle('Gazzetta dello Sport')
   
-      if(gazzettaLink != null)
+      if(gazzettaLink != null) {
+        console.log('Dog: Gazzetta link found!')
         return gazzettaLink
+      }
 
       var nextPageLink = page.nextPageLink()
       if(nextPageLink == null)

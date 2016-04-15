@@ -1,16 +1,23 @@
 var http = require('http')
-var GazzettaJumper = require('./src/gazzettaJumper')
+var GazzettaJumper = require('./src/GazzettaJumper')
 
 http.createServer(function(req, res) {
 
-  res.writeHead(200, {
-    'Content-Type': 'text/html'
-  })
+  if (req.url === '/favicon.ico') {
+    res.writeHead(200, {'Content-Type': 'image/x-icon'} );
+    res.end();
+    return;
+  }
 
-  var a = new GazzettaJumper();
+  try { 
+    res.writeHead(200, { 'Content-Type': 'text/html' })
+    var gj = new GazzettaJumper();
+    var link = gj.getLink()
+    res.write('<a href="' + link.href + '">' + link.title + '</a>');
+  } catch(e) {
+    res.write('No link found! ' + e);
+  }
 
-  var link = a.getLink()
-  res.write('<a href="' + link + '">' + link + '</a>');
   res.end()
 
 }).listen(80, '0.0.0.0')

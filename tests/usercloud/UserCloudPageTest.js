@@ -28,14 +28,14 @@ describe('UserCloudPage', function() {
       })
 
       it('works properly with single file page', function() {
-        var singleFileHtml = '<html><table id="xfiles">' +
-          '<td class="strong"><a href="//www.userscloud.com/jq73u9hsnge1">Il Corriere dello Sport - 04-04-2016</a></td>' + 
-          '</table></html>'
+        var singleFileHtml = '<html><table id="xfiles"><td class="strong">' +
+          '<a href="http://www.userscloud.com/jq73u9hsnge1">Il Corriere dello Sport - 04-04-2016</a>' +
+          '</td></table></html>'
         var page = new UserCloudPage(singleFileHtml)
         var link = page.linkWithTitle('Corriere dello Sport')
         expect(link).to.not.be.null
         expect(link.title).to.equal('Il Corriere dello Sport - 04-04-2016')
-        expect(link.href).to.equal('//www.userscloud.com/jq73u9hsnge1')
+        expect(link.href).to.equal('http://www.userscloud.com/jq73u9hsnge1')
       })
 
   })
@@ -48,7 +48,7 @@ describe('UserCloudPage', function() {
         expect(href).to.be.null
       })
 
-      it('returns link of the next page', function() {
+      it('returns full link of the next page', function() {
         var pagingHtml = '<div class="paging">' +
           '<b>1</b><a href="/go/k90iwrw5ngla/2/">2</a><a href="/go/k90iwrw5ngla/3/">3</a>' +
           '<a href="/go/k90iwrw5ngla/2/">Next &#187;</a><br><small>(54 total)</small>' +
@@ -56,7 +56,7 @@ describe('UserCloudPage', function() {
         var page = new UserCloudPage(pagingHtml)
         var link = page.nextPageLink()
         expect(link.title).to.equal("Next »")
-        expect(link.href).to.equal("/go/k90iwrw5ngla/2/")
+        expect(link.href).to.equal("http://userscloud.com/go/k90iwrw5ngla/2/")
       })
     
   })
@@ -77,7 +77,7 @@ describe('UserCloudPage', function() {
 
     it('next page link is recognized properly', function() {
       var link = page.nextPageLink()
-      expect(link.href).to.equal("/go/k90iwrw5ngla/2/")
+      expect(link.href).to.equal("http://userscloud.com/go/k90iwrw5ngla/2/")
     })
 
   })
