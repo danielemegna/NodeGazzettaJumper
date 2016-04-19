@@ -16,6 +16,12 @@ $ npm install
 $ ./mocha --recursive tests
 ```
 
+Deploy the container with
+```
+$ docker run -dp 8081:80 --name ngj ngj
+```
+
+
 Manual execution notes:
 
 ```
