@@ -6,7 +6,12 @@ function UserCloudPage(html) {
   var $cheerioHtml = cheerio.load(html)
 
   this.linkWithTitle = function(title) {
-    var results = $cheerioHtml('#xfiles td.strong > a:contains("' + title  + '")')
+
+    var results = $cheerioHtml('#xfiles td.strong > a').filter(function(i, e) {
+      var currentTitleLowerCase = $cheerioHtml(e).html().toLowerCase()
+      return currentTitleLowerCase.indexOf(title.toLowerCase()) > -1
+    })
+
     if(results.length > 0)
       return buildLink(results.first())
 

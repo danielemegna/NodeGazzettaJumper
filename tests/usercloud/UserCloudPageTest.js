@@ -38,6 +38,17 @@ describe('UserCloudPage', function() {
         expect(link.href).to.equal('http://www.userscloud.com/jq73u9hsnge1')
       })
 
+      it('is case insensitive', function() {
+        var singleFileHtml = '<html><table id="xfiles"><td class="strong">' +
+          '<a href="//userscloud.com/mplmhpajbd7c"> La GAZZETTA Dello sport con edizioni loc…</a>' +
+          '</td></table></html>'
+        var page = new UserCloudPage(singleFileHtml)
+        var link = page.linkWithTitle('Gazzetta dello Sport')
+        expect(link).to.not.be.null
+        expect(link.title).to.equal('La GAZZETTA Dello sport con edizioni loc…')
+        expect(link.href).to.equal('http://userscloud.com/mplmhpajbd7c')
+      })
+
   })
 
   describe('nextPageLink method', function() {
