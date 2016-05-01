@@ -1,6 +1,8 @@
 var RealWGetter = require('./RealWGetter')
 var Dog = require('./Dog')
+var DogList = require('./DogList')
 var UserCloudPageFactory = require('./usercloud/UserCloudPageFactory')
+var FilescdnPageFactory = require('./filescdn/FilescdnPageFactory')
 
 function GazzettaJumper() {
 
@@ -10,10 +12,12 @@ function GazzettaJumper() {
   this.getLink = function() {
     var wgetter = new RealWGetter()
 
-    var userCloudDog = new Dog(USERCLOUD_ENTER_URL, new UserCloudPageFactory(), wgetter)
-    var filescdnDog = new Dog(FILESCDN_ENTER_URL, new FilescdnPageFactory(), wgetter)
+    var dogList = new DogList([
+      new Dog(FILESCDN_ENTER_URL, new FilescdnPageFactory(), wgetter),
+      new Dog(USERCLOUD_ENTER_URL, new UserCloudPageFactory(), wgetter)
+    ])
 
-    return filescdnDog.find()
+    return dogList.find()
   }
 }
 
