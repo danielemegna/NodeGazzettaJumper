@@ -2,12 +2,12 @@ Build and start the docker container using:
 
 ```
 $ docker build -t ngj .
-$ docker run -dp 80:80 -v $(pwd):/app ngj
+$ docker run -dp 80:80 -v $(pwd):/app --name ngj ngj
 ```
 
 or for tty interactive mode:
 ```
-$ docker run -itp 80:80 -v $(pwd):/app ngj bash
+$ docker run -itp 80:80 -v $(pwd):/app --name ngj ngj bash
 ```
 
 Prepare dev environment using (inside the interactive container):
@@ -15,12 +15,6 @@ Prepare dev environment using (inside the interactive container):
 $ npm install 
 $ ./mocha --recursive tests
 ```
-
-Deploy the container with
-```
-$ docker run -dp 8081:80 --name ngj ngj
-```
-
 
 Manual execution notes:
 

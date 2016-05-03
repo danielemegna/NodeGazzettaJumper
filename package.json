@@ -1,4 +1,7 @@
 {
+  "author": "Daniele Megna",
+  "name": "NodeGazzettaJumper",
+  "version": "0.0.1",
   "dependencies": {
     "cheerio": "^0.20.0",
     "sync-request": "^3.0.0"
