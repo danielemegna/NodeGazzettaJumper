@@ -7,9 +7,7 @@ function AvxhomePage(html) {
 
   this.linkWithTitle = function(title) {
 
-    return null
-
-    var results = $cheerioHtml('#xfiles tr.selectable > td a').filter(function(i, e) {
+    var results = $cheerioHtml('.article .title-link').filter(function(i, e) {
       var currentTitleLowerCase = $cheerioHtml(e).html().toLowerCase()
       return currentTitleLowerCase.indexOf(title.toLowerCase()) > -1
     })
@@ -21,9 +19,7 @@ function AvxhomePage(html) {
   }
 
   this.nextPageLink = function() {
-    return null
-
-    var results = $cheerioHtml('.paging a:contains("Next")')
+    var results = $cheerioHtml('.pagination ul li a.next')
     if(results.length > 0)
       return buildLink(results.first())
 
@@ -31,14 +27,12 @@ function AvxhomePage(html) {
   }
 
   var buildLink = function(link) {
-    return null
-
     var cheerioLink = $cheerioHtml(link)
     var text = cheerioLink.text().trim()
     var href = cheerioLink.attr('href')
 
-    if(href.indexOf("filescdn.com") < 0)
-      href = "//filescdn.com" + href
+    if(href.indexOf("avxhome.in") < 0)
+      href = "//avxhome.in" + href
     if(href.indexOf("http") != 0)
       href = "http:" + href
 

@@ -21,48 +21,52 @@ describe('AvxhomePage', function() {
         expect(link).to.be.null
       })
 
-      xit('works properly with single file page', function() {
-        var singleFileHtml = '<html><table id="xfiles"><tr class="selectable"><td>' +
-          '<a href="//www.avxhome.com/5i0smm9bn6gu">La Gazzetta del Sud REGGIOCALABRIA - 01-05-2016MQ.pdf</a>' +
-          '</td></tr></table></html>'
+      it('works properly with single file page', function() {
+        var singleFileHtml = '<div class="article">' +
+          '<h1><a href="/newspapers/LaNazione23Maggio2016.html" class="title-link">La Nazione - 23 Maggio 2016</a></h1>' +
+          '</div>'
         var page = new AvxhomePage(singleFileHtml)
-        var link = page.linkWithTitle('Gazzetta del Sud')
+        var link = page.linkWithTitle('La Nazione')
         expect(link).to.not.be.null
-        expect(link.title).to.equal('La Gazzetta del Sud REGGIOCALABRIA - 01-05-2016MQ.pdf')
-        expect(link.href).to.equal('http://www.avxhome.com/5i0smm9bn6gu')
+        expect(link.title).to.equal('La Nazione - 23 Maggio 2016')
+        expect(link.href).to.equal('http://avxhome.in/newspapers/LaNazione23Maggio2016.html')
       })
 
-      xit('is case insensitive', function() {
-        var singleFileHtml = '<html><table id="xfiles"><tr class="selectable"><td>' +
-          '<a href="//www.avxhome.com/mplmhpajbd7c">La GAZZETTA del Sud</a>' +
-          '</td></tr></table></html>'
+      it('is case insensitive', function() {
+        var singleFileHtml = '<div class="article">' +
+          '<h1><a href="/newspapers/test.html" class="title-link">la gAZZetta dello SPort - 23 Maggio 2016</a></h1>' +
+          '</div>'
         var page = new AvxhomePage(singleFileHtml)
-        var link = page.linkWithTitle('Gazzetta del Sud')
+        var link = page.linkWithTitle('Gazzetta dello sport')
         expect(link).to.not.be.null
-        expect(link.title).to.equal('La GAZZETTA del Sud')
-        expect(link.href).to.equal('http://www.avxhome.com/mplmhpajbd7c')
+        expect(link.title).to.equal('la gAZZetta dello SPort - 23 Maggio 2016')
+        expect(link.href).to.equal('http://avxhome.in/newspapers/test.html')
       })
 
   })
 
   describe('nextPageLink method', function() {
 
-      xit('returns null with no next page link', function() {
+      it('returns null with no next page link', function() {
         var page = new AvxhomePage("<html></html>")
         var href = page.nextPageLink()
         expect(href).to.be.null
       })
 
-      xit('returns full link of the next page', function() {
-        var pagingHtml = '<div class="paging">' + 
-          '<b>1</b><a href="/go/embed/i4t6m655n555/2/">2</a><a href="/go/embed/i4t6m655n555/3/">3</a>' + 
-          '<a href="/go/embed/i4t6m655n555/4/">4</a>' + 
-          '<a href="/go/embed/i4t6m655n555/2/">Next &#187;</a><br><small>(80 total)</small>' +
+      it('returns full link of the next page', function() {
+        var pagingHtml = '<div class="pagination">' + 
+            '<ul>' +
+              '<li><a href="/newspapers/it/pages/1" class="prev">Previous</a></li>' +
+              '<li><a href="/newspapers/it/pages/1">1</a></li>' +
+              '<li><a class="active" href="/newspapers/it/pages/2">2</a></li>' +
+              '<li><a href="/newspapers/it/pages/3">3</a></li>' +
+              '<li><a href="/newspapers/it/pages/3" class="next">Next</a></li>' +
+            '</ul>' +
           '</div>'
         var page = new AvxhomePage(pagingHtml)
         var link = page.nextPageLink()
-        expect(link.title).to.equal("Next »")
-        expect(link.href).to.equal("http://avxhome.com/go/embed/i4t6m655n555/2/")
+        expect(link.title).to.equal("Next")
+        expect(link.href).to.equal("http://avxhome.in/newspapers/it/pages/3")
       })
     
   })
@@ -72,16 +76,17 @@ describe('AvxhomePage', function() {
     var realBigPageHtml = fs.readFileSync(__dirname + '/test1.html', 'utf8')
     var page = new AvxhomePage(realBigPageHtml)
 
-    xit('find links properly', function() {
+    it('find links properly', function() {
       var link = page.linkWithTitle("Gazzetta dello Sport")
       expect(link).to.be.null
 
       link = page.linkWithTitle("Corriere dello Sport")
       expect(link).to.not.be.null
       expect(link.title).to.equal("Corriere dello Sport - 23 Maggio 2016")
+      expect(link.href).to.equal("http://avxhome.in/newspapers/CorriereDelloSport23Maggio2016.html")
     })
 
-    xit('next page link is recognized properly', function() {
+    it('next page link is recognized properly', function() {
       var link = page.nextPageLink()
       expect(link.href).to.equal("http://avxhome.in/newspapers/it/pages/2")
     })
