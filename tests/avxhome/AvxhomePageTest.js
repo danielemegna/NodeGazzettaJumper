@@ -73,7 +73,7 @@ describe('AvxhomePage', function() {
   
   describe('with big real page', function() {
   
-    var realBigPageHtml = fs.readFileSync(__dirname + '/test1.html', 'utf8')
+    var realBigPageHtml = fs.readFileSync(__dirname + '/page1.html', 'utf8')
     var page = new AvxhomePage(realBigPageHtml)
 
     it('find links properly', function() {
