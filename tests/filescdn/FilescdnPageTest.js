@@ -22,7 +22,7 @@ describe('FilescdnPage', function() {
       })
 
       it('works properly with single file page', function() {
-        var singleFileHtml = '<html><table id="xfiles"><tr class="selectable"><td>' +
+        var singleFileHtml = '<html><table><tr><td>' +
           '<a href="//www.filescdn.com/5i0smm9bn6gu">La Gazzetta del Sud REGGIOCALABRIA - 01-05-2016MQ.pdf</a>' +
           '</td></tr></table></html>'
         var page = new FilescdnPage(singleFileHtml)
@@ -33,7 +33,7 @@ describe('FilescdnPage', function() {
       })
 
       it('is case insensitive', function() {
-        var singleFileHtml = '<html><table id="xfiles"><tr class="selectable"><td>' +
+        var singleFileHtml = '<html><table><tr><td>' +
           '<a href="//www.filescdn.com/mplmhpajbd7c">La GAZZETTA del Sud</a>' +
           '</td></tr></table></html>'
         var page = new FilescdnPage(singleFileHtml)

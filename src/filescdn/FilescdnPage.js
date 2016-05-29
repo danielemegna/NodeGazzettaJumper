@@ -7,7 +7,7 @@ function FilescdnPage(html) {
 
   this.linkWithTitle = function(title) {
 
-    var results = $cheerioHtml('#xfiles tr.selectable > td a').filter(function(i, e) {
+    var results = $cheerioHtml('table tr td a').filter(function(i, e) {
       var currentTitleLowerCase = $cheerioHtml(e).html().toLowerCase()
       return currentTitleLowerCase.indexOf(title.toLowerCase()) > -1
     })
