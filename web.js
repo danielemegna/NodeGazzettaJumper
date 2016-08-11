@@ -11,9 +11,9 @@ http.createServer(function(req, res) {
 
   try { 
     res.writeHead(200, { 'Content-Type': 'text/html' })
-    var gj = new GazzettaJumper();
-    var link = gj.getLink()
-    res.write('<a href="' + link.href + '">' + link.title + '</a>');
+    var wgetter = new RealWGetter()
+    var gj = new GazzettaJumper(wgetter);
+    res.write(gj.render());
   } catch(e) {
     res.write('No link found! ' + e);
   }
