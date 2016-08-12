@@ -1,4 +1,3 @@
-var RealWGetter = require('./RealWGetter')
 var Dog = require('./Dog')
 var DogList = require('./DogList')
 var UserCloudPageFactory = require('./usercloud/UserCloudPageFactory')
@@ -11,7 +10,7 @@ function GazzettaJumper(wgetter) {
   var FILESCDN_ENTER_URL = 'https://filescdn.com/f/embed/i4t6m655n555'
   var AVXHOME_ENTER_URL = 'http://avxhome.in/newspapers/it'
 
-  this.getLink = function() {
+  this.render = function() {
 
     var dogList = new DogList([
       new Dog(FILESCDN_ENTER_URL, new FilescdnPageFactory(), wgetter),
