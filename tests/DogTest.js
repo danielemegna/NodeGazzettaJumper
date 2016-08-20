@@ -6,44 +6,46 @@ var chai = require('chai'),
 
 describe('Dog', function() {
 
-  xit('exists', function() {
-    var dog = new Dog("http://enter.page.url", null, null)
+  it('exists', function() {
+    var dog = new Dog(null, null)
     expect(dog).to.not.be.undefined
     expect(dog).to.not.be.null
     expect(dog).to.be.an.instanceof(Dog)
   })
 
-  var wgetterMock, pageFactoryMock, pageMock, dog
+  var wgetterMock, pageBuilderMock, pageMock, dog
   var wgetter = { get: function (url) {} },
-      pageFactory = { build: function (html) {} },
-      page = { linkWithTitle: function (title) {} }
-  var enterUrl = 'http://enter.page.url'
+      pageBuilder = { getEnterUrl: function() {}, withHtml: function() {}, build: function () {} },
+      page = { linksWithTitle: function (title) {} }
 
   beforeEach(function() {
     wgetterMock = sinon.mock(wgetter)
-    pageFactoryMock = sinon.mock(pageFactory)
+    pageBuilderMock = sinon.mock(pageBuilder)
     pageMock = sinon.mock(page)
     
-    dog = new Dog(enterUrl, pageFactory, wgetter)
+    dog = new Dog(pageBuilder, wgetter)
   })
 
   afterEach(function() {
 		wgetterMock.verify()
-		pageFactoryMock.verify()
+		pageBuilderMock.verify()
 		pageMock.verify()
   })
 
-  xit('find link when present in enterUrl page', function() {
+  it('find link when present in enterUrl page', function() {
+    var enterUrl = 'http://enterUrl'
     var enterUrlPageHtml = 'enterUrl page html'
-    var expectedFoundLink = { title: 'Found title', href: '//found.href' }
+    var expectedFoundLinks = [{ title: 'Found title', href: '//found.href' }]
 
+    pageBuilderMock.expects('getEnterUrl').once().returns(enterUrl)
     wgetterMock.expects('get').once().withExactArgs(enterUrl).returns(enterUrlPageHtml)
-    pageFactoryMock.expects('build').once().withExactArgs(enterUrlPageHtml).returns(page)
-    pageMock.expects('linkWithTitle').once().withExactArgs('Gazzetta dello Sport').returns(expectedFoundLink)
+    pageBuilderMock.expects('withHtml').once().withExactArgs(enterUrlPageHtml).returns(pageBuilder)
+    pageBuilderMock.expects('build').once().returns(page)
+    pageMock.expects('linksWithTitle').once().withExactArgs('Gazzetta dello Sport').returns(expectedFoundLinks)
 
     var foundLink = dog.find()
 
-    expect(foundLink).to.equals(expectedFoundLink)
+    expect(foundLink).to.equals(expectedFoundLinks[0])
   })
 
 })
