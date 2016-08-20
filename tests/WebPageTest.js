@@ -74,8 +74,6 @@ describe('WebPage', function() {
       it('returns null with no next page link', function() {
         var page = new WebPage('<html></html>', 'a.links-css-selector', 'a.next-css-selector', 'www.domain.com')
         var link = page.nextPageLink()
-        console.log("LINK ")
-        console.log(link)
         expect(link).to.be.null
       })
 
@@ -87,8 +85,6 @@ describe('WebPage', function() {
           '</div>'
         var page = new WebPage(pagingHtml, 'a.links-css-selector', '.paging a:contains("Next")', 'www.domain.com')
         var link = page.nextPageLink()
-        console.log("LINK ")
-        console.log(link)
         expect(link.title).to.equal("Next »")
         expect(link.href).to.equal("http://www.domain.com/go/embed/i4t6m655n555/2/")
       })
@@ -97,20 +93,24 @@ describe('WebPage', function() {
   
   describe('with big real page', function() {
   
-    //var realBigPageHtml = fs.readFileSync(__dirname + '/test1.html', 'utf8')
-    //var page = new WebPage(realBigPageHtml)
+    var realBigPageHtml = fs.readFileSync(__dirname + '/test1.html', 'utf8')
+    var page = new WebPage(realBigPageHtml)
+    var page = new WebPage(realBigPageHtml, 'table tr td a', '.paging a:contains("Next")', 'filescdn.com')
 
-    xit('find links properly', function() {
+    it('find links properly', function() {
       var links = page.linksWithTitle("Gazzetta dello Sport")
-      expect(link).to.be.null
+      expect(links.length).to.equal(0)
 
-      link = page.linksWithTitle("Corriere della Sera")
-      expect(link).to.not.be.null
+      links = page.linksWithTitle("Corriere della Sera")
+      expect(links.length).to.equal(1)
+
+      var link = links[0]
       expect(link.title).to.equal("Corriere della Sera La Lettura - 1 Maggio 2016.pdf")
+      expect(link.href).to.equal("http://www.filescdn.com/h8j64221zbpe")
     })
 
-    xit('next page link is recognized properly', function() {
-      var links = page.nextPageLink()
+    it('next page link is recognized properly', function() {
+      var link = page.nextPageLink()
       expect(link.href).to.equal("http://filescdn.com/go/embed/i4t6m655n555/2/")
     })
 
