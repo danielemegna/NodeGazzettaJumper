@@ -131,10 +131,15 @@ describe('WebPage', function() {
 
       links = page.linksWithTitle("Corriere della Sera")
       expect(links.length).to.equal(1)
+      expect(links[0].title).to.equal("Corriere della Sera La Lettura - 1 Maggio 2016.pdf")
+      expect(links[0].href).to.equal("http://www.filescdn.com/h8j64221zbpe")
 
-      var link = links[0]
-      expect(link.title).to.equal("Corriere della Sera La Lettura - 1 Maggio 2016.pdf")
-      expect(link.href).to.equal("http://www.filescdn.com/h8j64221zbpe")
+      links = page.linksWithTitle("La Gazzetta")
+      expect(links.length).to.equal(4)
+      expect(links[0].title).to.equal("La Gazzetta del Sud REGGIOCALABRIA - 01-05-2016MQ.pdf")
+      expect(links[1].href).to.equal("http://www.filescdn.com/5monx075lq81")
+      expect(links[2].title).to.equal("La Gazzetta del Sud MESSINA - 01-05-2016MQ.pdf")
+      expect(links[3].href).to.equal("http://www.filescdn.com/ggho0h4q8eg4")
     })
 
     it('next page link is recognized properly', function() {

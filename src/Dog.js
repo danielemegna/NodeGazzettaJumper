@@ -1,24 +1,28 @@
-var Dog = function(webPageBuilder, wgetter) {
-	
+var Dog = function(webPageBuilder, wgetter, pagesToBeLooked) {
+
 	this.find = function() {
     var url = webPageBuilder.getEnterUrl()
+    var result = []
 
-    while(true) {
+    while(true) { 
       var html = wgetter.get(url)
       var page = webPageBuilder.withHtml(html).build()
-      var links = page.linksWithTitle('Gazzetta dello Sport')
+      var found = page.linksWithTitle('Gazzetta dello Sport')
   
-      if(links.length > 0) {
-        console.log('Dog: Gazzetta link found!')
-        return links[0]
-      }
+      if(found.length > 0)
+        result = result.concat(found)
+
+      if(--pagesToBeLooked == 0)
+        break
 
       var nextPageLink = page.nextPageLink()
       if(nextPageLink == null)
-        return null
+        break
 
       url = nextPageLink.href
     }
+
+    return result
 	}
 }
 

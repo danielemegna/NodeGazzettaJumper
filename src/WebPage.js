@@ -9,6 +9,7 @@ WebPage = function(html, linksCssSelector, nextLinkCssSelector, siteDomain) {
     return $cheerioHtml(linksCssSelector)
       .filter(titleLike(title))
       .map(buildLink)
+      .toArray()
   }
 
   this.nextPageLink = function() {

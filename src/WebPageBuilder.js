@@ -41,6 +41,10 @@ var WebPageBuilder = function() {
     return this.enterUrl
   }
 
+  this.getSiteDomain = function() {
+    return this.siteDomain
+  }
+
 }
 
 module.exports = WebPageBuilder

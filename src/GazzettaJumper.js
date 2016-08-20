@@ -5,11 +5,15 @@ function GazzettaJumper(wgetter) {
 
   this.render = function() {
 
+    var html = '<h1>NodeGazzettaJumper</h1>'
+
     var filescdnPageBuilder = new WebPageBuilder()
       .withEnterUrl('https://filescdn.com/f/embed/i4t6m655n555')
       .withLinksCssSelector('table tr td a')
       .withNextLinkCssSelector('.paging a:contains("Next")')
       .withSiteDomain('filescdn.com')
+
+    html += renderPageBuilder(filescdnPageBuilder, 3)
 
     var avxhomePageBuilder = new WebPageBuilder()
       .withEnterUrl('http://avxhome.in/newspapers/it')
@@ -17,20 +21,26 @@ function GazzettaJumper(wgetter) {
       .withNextLinkCssSelector('.pagination ul li a.next')
       .withSiteDomain('avxhome.in')
 
-    var dogList = [
-      new Dog(filescdnPageBuilder, wgetter),
-      new Dog(avxhomePageBuilder, wgetter)
-    ]
+    html += renderPageBuilder(avxhomePageBuilder, 3)
 
-    var html = "<ul>"
-    for (var i = 0; i < dogList.length; i++) {
-      var link = dogList[i].find()
-      if(link != null)
-        html += '<li><a href="' + link.href + '">' + link.title + '</a></li>'
+    return html
+  }
+  
+  function renderPageBuilder(pageBuilder, pagesToBeLooked) {
+    var html = "<h3>" + pageBuilder.getSiteDomain()  + "</h3>"
+    
+    var dog = new Dog(pageBuilder, wgetter, pagesToBeLooked)
+    var foundLinks = dog.find()
+
+    html += "<ul>"
+    for (var i = 0; i < foundLinks.length; i++) {
+      var link = foundLinks[i][0]
+      html += '<li><a href="' + foundLinks[i].href + '">' + foundLinks[i].title + '</a></li>'
     }
 
     return html + "</ul>"
   }
+
 }
 
 module.exports = GazzettaJumper
