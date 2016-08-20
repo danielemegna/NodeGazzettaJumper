@@ -13,7 +13,19 @@ $ docker run -itp 80:80 -v $(pwd):/app --name ngj ngj bash
 Prepare dev environment using (inside the interactive container):
 ```
 $ npm install 
+```
+
+Run tests via
+```
 $ ./mocha --recursive tests
+// or easier with
+$ ./runtests.sh
+```
+Select which tests run with
+```
+$ ./mocha tests --grep Dog*
+// or easier with
+$ ./runtests.sh Dog*
 ```
 
 Manual execution notes:

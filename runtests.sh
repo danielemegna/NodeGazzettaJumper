@@ -1,2 +1,9 @@
 #!/bin/bash
-clear && ./mocha --recursive tests
+clear
+
+if [ -z "$1" ]
+  then
+    ./mocha --recursive tests
+  else
+    ./mocha tests --grep $1
+fi
