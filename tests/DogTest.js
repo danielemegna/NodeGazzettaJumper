@@ -6,7 +6,7 @@ var chai = require('chai'),
 
 describe('Dog', function() {
 
-  it('exists', function() {
+  xit('exists', function() {
     var dog = new Dog("http://enter.page.url", null, null)
     expect(dog).to.not.be.undefined
     expect(dog).to.not.be.null
@@ -33,7 +33,7 @@ describe('Dog', function() {
 		pageMock.verify()
   })
 
-  it('find link when present in enterUrl page', function() {
+  xit('find link when present in enterUrl page', function() {
     var enterUrlPageHtml = 'enterUrl page html'
     var expectedFoundLink = { title: 'Found title', href: '//found.href' }
 

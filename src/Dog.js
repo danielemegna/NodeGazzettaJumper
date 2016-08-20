@@ -1,16 +1,16 @@
-var Dog = function(enterUrl, pageFactory, wgetter) {
+var Dog = function(webPageBuilder, wgetter) {
 	
 	this.find = function() {
-    var url = enterUrl
+    var url = webPageBuilder.getEnterUrl()
 
     while(true) {
       var html = wgetter.get(url)
-      var page = pageFactory.build(html)
-      var gazzettaLink = page.linkWithTitle('Gazzetta dello Sport')
+      var page = webPageBuilder.withHtml(html).build()
+      var links = page.linksWithTitle('Gazzetta dello Sport')
   
-      if(gazzettaLink != null) {
+      if(links.length > 0) {
         console.log('Dog: Gazzetta link found!')
-        return gazzettaLink
+        return links[0]
       }
 
       var nextPageLink = page.nextPageLink()

@@ -2,6 +2,7 @@ var Dog = require('./Dog')
 var UserCloudPageFactory = require('./usercloud/UserCloudPageFactory')
 var FilescdnPageFactory = require('./filescdn/FilescdnPageFactory')
 var AvxhomePageFactory = require('./avxhome/AvxhomePageFactory')
+var WebPageBuilder = require('./WebPageBuilder')
 
 function GazzettaJumper(wgetter) {
 
@@ -10,9 +11,21 @@ function GazzettaJumper(wgetter) {
 
   this.render = function() {
 
+    var filescdnPageBuilder = new WebPageBuilder()
+      .withEnterUrl(FILESCDN_ENTER_URL)
+      .withLinksCssSelector('table tr td a')
+      .withNextLinkCssSelector('.paging a:contains("Next")')
+      .withSiteDomain('filescdn.com')
+
+    var avxhomePageBuilder = new WebPageBuilder()
+      .withEnterUrl(AVXHOME_ENTER_URL)
+      .withLinksCssSelector('.article .title-link')
+      .withNextLinkCssSelector('.pagination ul li a.next')
+      .withSiteDomain('avxhome.in')
+
     var dogList = [
-      new Dog(FILESCDN_ENTER_URL, new FilescdnPageFactory(), wgetter),
-      new Dog(AVXHOME_ENTER_URL, new AvxhomePageFactory(), wgetter)
+      new Dog(filescdnPageBuilder, wgetter),
+      new Dog(avxhomePageBuilder, wgetter)
     ]
 
     var html = "<ul>"

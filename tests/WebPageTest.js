@@ -1,8 +1,8 @@
 var chai = require('chai'),
     expect = chai.expect,
     fs = require('fs'),
-    WebPage = require('../src/WebPage').WebPage,
-    WebPageBuilder = require('../src/WebPage').WebPageBuilder
+    WebPage = require('../src/WebPage'),
+    WebPageBuilder = require('../src/WebPageBuilder')
 
 describe('WebPage', function() {
     
