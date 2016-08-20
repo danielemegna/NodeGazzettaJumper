@@ -1,24 +1,18 @@
 var Dog = require('./Dog')
-var UserCloudPageFactory = require('./usercloud/UserCloudPageFactory')
-var FilescdnPageFactory = require('./filescdn/FilescdnPageFactory')
-var AvxhomePageFactory = require('./avxhome/AvxhomePageFactory')
 var WebPageBuilder = require('./WebPageBuilder')
 
 function GazzettaJumper(wgetter) {
 
-  var FILESCDN_ENTER_URL = 'https://filescdn.com/f/embed/i4t6m655n555'
-  var AVXHOME_ENTER_URL = 'http://avxhome.in/newspapers/it'
-
   this.render = function() {
 
     var filescdnPageBuilder = new WebPageBuilder()
-      .withEnterUrl(FILESCDN_ENTER_URL)
+      .withEnterUrl('https://filescdn.com/f/embed/i4t6m655n555')
       .withLinksCssSelector('table tr td a')
       .withNextLinkCssSelector('.paging a:contains("Next")')
       .withSiteDomain('filescdn.com')
 
     var avxhomePageBuilder = new WebPageBuilder()
-      .withEnterUrl(AVXHOME_ENTER_URL)
+      .withEnterUrl('http://avxhome.in/newspapers/it')
       .withLinksCssSelector('.article .title-link')
       .withNextLinkCssSelector('.pagination ul li a.next')
       .withSiteDomain('avxhome.in')
