@@ -117,7 +117,7 @@ describe('WebPage', function() {
   
   describe('with big real page', function() {
   
-    var realBigPageHtml = fs.readFileSync(__dirname + '/test1.html', 'utf8')
+    var realBigPageHtml = fs.readFileSync(__dirname + '/html/filescdn1.html', 'utf8')
     var page = new WebPageBuilder()
       .withHtml(realBigPageHtml)
       .withLinksCssSelector('table tr td a')
