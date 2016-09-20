@@ -9,7 +9,8 @@ http.createServer(function(req, res) {
   try { 
     route(req, res)
   } catch(e) {
-    res.write('>>> Ops! ' + e);
+    res.write('>>> Ops! ' + e + '\n')
+    res.write(e.stack)
   } finally {
     res.end()
   }
