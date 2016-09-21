@@ -13,4 +13,4 @@ RUN npm install --production
 ENV NODE_PATH /usr/local/lib/node_modules
 
 WORKDIR /app
-CMD ["node", "web.js"]
+CMD ["node", "index.js"]
