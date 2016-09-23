@@ -17,20 +17,20 @@ http.createServer(function(req, res) {
 }).listen(process.env.PORT || 80, '0.0.0.0')
 
 function route(req, res) {
-    if (req.url === '/favicon.ico') {
-      res.writeHead(200, {'Content-Type': 'image/x-icon'} );
-      return;
-    }
+	if (req.url === '/favicon.ico') {
+		res.writeHead(200, {'Content-Type': 'image/x-icon'} );
+		return;
+	}
 
-    if (!fileExists(HTML_CACHE_FILE) || req.url === '/renew') {
-      var wgetter = new RealWGetter()
-      var gj = new GazzettaJumper(wgetter)
-      var html = gj.render()
-      fs.writeFileSync(HTML_CACHE_FILE, html)
-    }
+	if (!fileExists(HTML_CACHE_FILE) || req.url === '/renew') {
+		var wgetter = new RealWGetter()
+		var gj = new GazzettaJumper(wgetter)
+		var html = gj.render()
+		fs.writeFileSync(HTML_CACHE_FILE, html)
+	}
 
-    res.writeHead(200, { 'Content-Type': 'text/html' })
-    res.write(fs.readFileSync(HTML_CACHE_FILE).toString())
+	res.writeHead(200, { 'Content-Type': 'text/html' })
+	res.write(fs.readFileSync(HTML_CACHE_FILE).toString())
 }
 
 function fileExists(filePath) {
