@@ -22,7 +22,7 @@ function route(req, res) {
       return;
     }
 
-    if (req.url === '/renew') {
+    if (!fileExists(HTML_CACHE_FILE) || req.url === '/renew') {
       var wgetter = new RealWGetter()
       var gj = new GazzettaJumper(wgetter)
       var html = gj.render()
@@ -31,6 +31,14 @@ function route(req, res) {
 
     res.writeHead(200, { 'Content-Type': 'text/html' })
     res.write(fs.readFileSync(HTML_CACHE_FILE).toString())
+}
+
+function fileExists(filePath) {
+	try {
+		return fs.statSync(filePath).isFile();
+	} catch (err)	{
+			return false;
+	} 
 }
 
 console.log('Server running..')
