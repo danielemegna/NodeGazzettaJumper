@@ -13,7 +13,7 @@ function GazzettaJumper(wgetter) {
       .withNextLinkCssSelector('.paging a:contains("Next")')
       .withSiteDomain('filescdn.com')
 
-    html += renderPageBuilder(filescdnPageBuilder, 3)
+    html += renderPageBuilder(filescdnPageBuilder, 5)
 
     var avxhomePageBuilder = new WebPageBuilder()
       .withEnterUrl('http://avxhome.in/newspapers/it')
@@ -29,7 +29,7 @@ function GazzettaJumper(wgetter) {
       .withNextLinkCssSelector('.navigation span + a')
       .withSiteDomain('dasolo.org')
 
-    html += renderPageBuilder(dasoloPageBuilder, 2)
+    html += renderPageBuilder(dasoloPageBuilder, 3)
 
     return html
   }
