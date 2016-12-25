@@ -14,7 +14,7 @@ http.createServer(function(req, res) {
   } finally {
     res.end()
   }
-}).listen(process.env.PORT || 80, '0.0.0.0')
+}).listen(80, '0.0.0.0')
 
 function route(req, res) {
 	if (req.url === '/favicon.ico') {

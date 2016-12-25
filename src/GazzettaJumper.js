@@ -13,7 +13,7 @@ function GazzettaJumper(wgetter) {
       .withNextLinkCssSelector('.paging a:contains("Next")')
       .withSiteDomain('filescdn.com')
 
-    html += renderPageBuilder(filescdnPageBuilder, 5)
+    html += renderPageBuilder(filescdnPageBuilder, 8)
 
     var avxhomePageBuilder = new WebPageBuilder()
       .withEnterUrl('http://avxhome.in/newspapers/it')
@@ -21,7 +21,7 @@ function GazzettaJumper(wgetter) {
       .withNextLinkCssSelector('.pagination ul li a.next')
       .withSiteDomain('avxhome.in')
 
-    html += renderPageBuilder(avxhomePageBuilder, 3)
+    html += renderPageBuilder(avxhomePageBuilder, 5)
 
     var dasoloPageBuilder = new WebPageBuilder()
       .withEnterUrl('http://dasolo.org/e-books/quotidiani/')
@@ -29,7 +29,7 @@ function GazzettaJumper(wgetter) {
       .withNextLinkCssSelector('.navigation span + a')
       .withSiteDomain('dasolo.org')
 
-    html += renderPageBuilder(dasoloPageBuilder, 3)
+    html += renderPageBuilder(dasoloPageBuilder, 5)
 
     return html
   }
