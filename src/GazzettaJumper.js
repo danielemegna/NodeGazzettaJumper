@@ -36,17 +36,32 @@ function GazzettaJumper(wgetter) {
   
   function renderPageBuilder(pageBuilder, pagesToBeLooked) {
     var html = "<h3>" + pageBuilder.getSiteDomain()  + "</h3>"
-    
-    var dog = new Dog(pageBuilder, wgetter, pagesToBeLooked)
-    var foundLinks = dog.find()
 
-    html += "<ul>"
-    for (var i = 0; i < foundLinks.length; i++) {
-      var link = foundLinks[i][0]
-      html += '<li><a href="' + foundLinks[i].href + '">' + foundLinks[i].title + '</a></li>'
+    var dog = new Dog(pageBuilder, wgetter, pagesToBeLooked)
+    try {
+      html += renderDog(dog)
+    } catch(e) {
+      html += renderDogException(e)
     }
 
     return html + "</ul>"
+  }
+
+  function renderDog(dog) {
+      var foundLinks = dog.find()
+
+      var html = "<ul>"
+      for (var i = 0; i < foundLinks.length; i++) {
+        var link = foundLinks[i]
+        html += '<li><a href="' + link.href + '">' + link.title + '</a></li>'
+      }
+      return html + "</ul>"
+  }
+
+  function renderDogException(e) {
+      return '<pre>' +
+        '>>> Ops! ' + e + '\n' + e.stack +
+      '</pre>'
   }
 
 }
