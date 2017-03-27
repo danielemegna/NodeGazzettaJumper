@@ -31,6 +31,14 @@ function GazzettaJumper(wgetter) {
 
     html += renderPageBuilder(dasoloPageBuilder, 8)
 
+    var nodefilesPageBuilder = new WebPageBuilder()
+      .withEnterUrl('https://nodefiles.com/users/magazine/1472/GIORNALI')
+      .withLinksCssSelector('table#files_list tr td a[target=_blank]')
+      .withNextLinkCssSelector('nav ul.pagination li:not(.active) a:not([aria-label=Previous])')
+      .withSiteDomain('nodefiles.com')
+
+    html += renderPageBuilder(nodefilesPageBuilder, 4)
+
     return html
   }
   

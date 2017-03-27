@@ -35,6 +35,7 @@ describe('GazzettaJumper', function() {
   })
 
   it('shows avxhome links', function() {
+    wgetter.push('empty.html')
     wgetter.push('avxhome1.html')
     wgetter.push('avxhome2.html')
 
@@ -43,6 +44,26 @@ describe('GazzettaJumper', function() {
 
     page.hasLinksCountUnder('avxhome.in', 1)
     page.hasNoLinksUnder('filescdn.com')
+  })
+
+  it('full page test', function() {
+    wgetter.push('filescdn1.html')
+    wgetter.push('filescdn2.html')
+    wgetter.push('empty.html')
+    wgetter.push('avxhome1.html')
+    wgetter.push('avxhome2.html')
+    wgetter.push('empty.html')
+    wgetter.push('dasolo.html')
+    wgetter.push('nodefiles.html')
+
+    var html = gj.render()
+    var page = new RenderedPage(html)
+
+    page.hasMainTitle('NodeGazzettaJumper')
+    page.hasLinksCountUnder('filescdn.com', 2)
+    page.hasLinksCountUnder('avxhome.in', 1)
+    page.hasNoLinksUnder('dasolo.online')
+    page.hasLinksCountUnder('nodefiles.com', 1)
   })
 
 })
@@ -80,7 +101,7 @@ var FakeWGetter = function() {
     if(this.pages.length == 0)
       return this.default
 
-    return this.pages.pop()
+    return this.pages.shift()
   }
 
   this.push = function(filename) {
