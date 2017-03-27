@@ -44,7 +44,7 @@ function GazzettaJumper(wgetter) {
       html += renderDogException(e)
     }
 
-    return html + "</ul>"
+    return html
   }
 
   function renderDog(dog) {
