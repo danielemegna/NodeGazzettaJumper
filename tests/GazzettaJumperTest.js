@@ -50,10 +50,15 @@ describe('GazzettaJumper', function() {
     wgetter.push('filescdn1.html')
     wgetter.push('filescdn2.html')
     wgetter.push('empty.html')
+
     wgetter.push('avxhome1.html')
     wgetter.push('avxhome2.html')
     wgetter.push('empty.html')
-    wgetter.push('dasolo.html')
+
+    wgetter.push('dasolo1.html')
+    wgetter.push('dasolo2.html')
+    wgetter.push('empty.html')
+
     wgetter.push('nodefiles.html')
 
     var html = gj.render()
@@ -62,7 +67,7 @@ describe('GazzettaJumper', function() {
     page.hasMainTitle('NodeGazzettaJumper')
     page.hasLinksCountUnder('filescdn.com', 2)
     page.hasLinksCountUnder('avxhome.in', 1)
-    page.hasNoLinksUnder('dasolo.online')
+    page.hasLinksCountUnder('dasolo.co', 1)
     page.hasLinksCountUnder('nodefiles.com', 1)
   })
 

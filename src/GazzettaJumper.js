@@ -25,7 +25,7 @@ function GazzettaJumper(wgetter) {
 
     var dasoloPageBuilder = new WebPageBuilder()
       .withEnterUrl('http://www.dasolo.co/e-books/quotidiani')
-      .withLinksCssSelector('#maincontent h2.short a')
+      .withLinksCssSelector('#dle-content h1.shd a')
       .withNextLinkCssSelector('.navigation span:not(.nav_ext) + a')
       .withSiteDomain('dasolo.co')
 
