@@ -24,10 +24,10 @@ function GazzettaJumper(wgetter) {
     html += renderPageBuilder(avxhomePageBuilder, 8)
 
     var dasoloPageBuilder = new WebPageBuilder()
-      .withEnterUrl('http://dasolo.online/e-books/quotidiani/')
+      .withEnterUrl('http://www.dasolo.co/e-books/quotidiani')
       .withLinksCssSelector('#maincontent h2.short a')
       .withNextLinkCssSelector('.navigation span:not(.nav_ext) + a')
-      .withSiteDomain('dasolo.online')
+      .withSiteDomain('dasolo.co')
 
     html += renderPageBuilder(dasoloPageBuilder, 8)
 
