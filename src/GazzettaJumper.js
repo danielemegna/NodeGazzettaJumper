@@ -23,8 +23,13 @@ function GazzettaJumper(wgetter) {
       new WebPageBuilder()
         .withEnterUrl('https://nodefiles.com/users/magazine/1472/GIORNALI')
         .withLinksCssSelector('table#files_list tr td a[target=_blank]')
-        .withNextLinkCssSelector('nav ul.pagination li:not(.active) a:not([aria-label=Previous])')
-        .withSiteDomain('nodefiles.com')
+        .withNextLinkCssSelector('')
+        .withSiteDomain('nodefiles.com'),
+      new WebPageBuilder()
+        .withEnterUrl('https://ingressive-gallons.000webhostapp.com/italian-magazines-and-newspaper.php')
+        .withLinksCssSelector('ul div#code a')
+        .withNextLinkCssSelector('')
+        .withSiteDomain('ingressivegallons'),
     ]
 
     var html = '<h1>NodeGazzettaJumper</h1>'

@@ -61,6 +61,8 @@ describe('GazzettaJumper', function() {
 
     wgetter.push('nodefiles.html')
 
+    wgetter.push('ingressive-gallons1.html')
+
     var html = gj.render()
     var page = new RenderedPage(html)
 
@@ -69,6 +71,7 @@ describe('GazzettaJumper', function() {
     page.hasLinksCountUnder('avxhome.in', 1)
     page.hasLinksCountUnder('dasolo.co', 1)
     page.hasLinksCountUnder('nodefiles.com', 1)
+    page.hasLinksCountUnder('ingressivegallons', 3)
   })
 
 })
@@ -103,6 +106,7 @@ var FakeWGetter = function() {
   this.pages = []
 
   this.get = function(url) {
+    //console.log('FakeWGetter: Fetching ' + url + ' ...')
     if(this.pages.length == 0)
       return this.default
 
