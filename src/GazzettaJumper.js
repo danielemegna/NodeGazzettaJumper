@@ -4,40 +4,33 @@ var WebPageBuilder = require('./WebPageBuilder')
 function GazzettaJumper(wgetter) {
 
   this.render = function() {
+    const pages = [
+      new WebPageBuilder()
+        .withEnterUrl('https://filescdn.com/f/embed/i4t6m655n555')
+        .withLinksCssSelector('table tr td a')
+        .withNextLinkCssSelector('.paging a:contains("Next")')
+        .withSiteDomain('filescdn.com'),
+      new WebPageBuilder()
+        .withEnterUrl('http://avxhome.in/newspapers/it')
+        .withLinksCssSelector('.article .title-link')
+        .withNextLinkCssSelector('.pagination ul li a.next')
+        .withSiteDomain('avxhome.in'),
+      new WebPageBuilder()
+        .withEnterUrl('http://www.dasolo.co/e-books/quotidiani')
+        .withLinksCssSelector('#dle-content h1.shd a')
+        .withNextLinkCssSelector('.navigation span:not(.nav_ext) + a')
+        .withSiteDomain('dasolo.co'),
+      new WebPageBuilder()
+        .withEnterUrl('https://nodefiles.com/users/magazine/1472/GIORNALI')
+        .withLinksCssSelector('table#files_list tr td a[target=_blank]')
+        .withNextLinkCssSelector('nav ul.pagination li:not(.active) a:not([aria-label=Previous])')
+        .withSiteDomain('nodefiles.com')
+    ]
 
     var html = '<h1>NodeGazzettaJumper</h1>'
-
-    var filescdnPageBuilder = new WebPageBuilder()
-      .withEnterUrl('https://filescdn.com/f/embed/i4t6m655n555')
-      .withLinksCssSelector('table tr td a')
-      .withNextLinkCssSelector('.paging a:contains("Next")')
-      .withSiteDomain('filescdn.com')
-
-    html += renderPageBuilder(filescdnPageBuilder, 8)
-
-    var avxhomePageBuilder = new WebPageBuilder()
-      .withEnterUrl('http://avxhome.in/newspapers/it')
-      .withLinksCssSelector('.article .title-link')
-      .withNextLinkCssSelector('.pagination ul li a.next')
-      .withSiteDomain('avxhome.in')
-
-    html += renderPageBuilder(avxhomePageBuilder, 8)
-
-    var dasoloPageBuilder = new WebPageBuilder()
-      .withEnterUrl('http://www.dasolo.co/e-books/quotidiani')
-      .withLinksCssSelector('#dle-content h1.shd a')
-      .withNextLinkCssSelector('.navigation span:not(.nav_ext) + a')
-      .withSiteDomain('dasolo.co')
-
-    html += renderPageBuilder(dasoloPageBuilder, 8)
-
-    var nodefilesPageBuilder = new WebPageBuilder()
-      .withEnterUrl('https://nodefiles.com/users/magazine/1472/GIORNALI')
-      .withLinksCssSelector('table#files_list tr td a[target=_blank]')
-      .withNextLinkCssSelector('nav ul.pagination li:not(.active) a:not([aria-label=Previous])')
-      .withSiteDomain('nodefiles.com')
-
-    html += renderPageBuilder(nodefilesPageBuilder, 4)
+    pages.forEach(function(pageBuilder) {
+      html += renderPageBuilder(pageBuilder, 8)
+    })
 
     return html
   }
