@@ -32,10 +32,12 @@ WebPage = function(html, linksCssSelector, nextLinkCssSelector, siteDomain) {
     var text = cheerioLink.text().trim()
     var href = cheerioLink.attr('href')
 
-    if(href.indexOf(siteDomain) < 0)
-      href = "//" + siteDomain + href
-    if(href.indexOf("http") != 0)
-      href = "http:" + href
+    if(href.indexOf("http") != 0) {
+      if(href.indexOf(siteDomain) < 0)
+        href = "//" + siteDomain + href
+      if(href.indexOf("http") != 0)
+        href = "http:" + href
+    }
 
     return new Link(text, href)
   }
