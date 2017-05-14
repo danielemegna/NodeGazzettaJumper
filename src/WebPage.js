@@ -20,10 +20,14 @@ WebPage = function(html, linksCssSelector, nextLinkCssSelector, siteDomain) {
     return null
   }
 
-  function titleLike(title) {
+  function titleLike(titleToFind) {
     return function(index, link) {
-      var currentTitleLowerCase = $cheerioHtml(link).html().toLowerCase()
-      return currentTitleLowerCase.indexOf(title.toLowerCase()) > -1
+      var currentTitleLowerCase = $cheerioHtml(link)
+        .text()
+        .toLowerCase()
+        .replace(/_/g, " ")
+
+      return currentTitleLowerCase.indexOf(titleToFind.toLowerCase()) > -1
     }
   }
 

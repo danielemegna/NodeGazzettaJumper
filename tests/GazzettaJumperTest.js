@@ -71,7 +71,7 @@ describe('GazzettaJumper', function() {
     page.hasLinksCountUnder('avxhome.in', 1)
     page.hasLinksCountUnder('dasolo.co', 1)
     page.hasLinksCountUnder('nodefiles.com', 1)
-    page.hasLinksCountUnder('ingressivegallons', 3)
+    page.hasLinksCountUnder('ingressivegallons', 4)
   })
 
 })
