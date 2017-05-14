@@ -29,7 +29,12 @@ function GazzettaJumper(wgetter) {
         .withEnterUrl('https://ingressive-gallons.000webhostapp.com/italian-magazines-and-newspaper.php')
         .withLinksCssSelector('ul div#code a')
         .withNextLinkCssSelector('')
-        .withSiteDomain('ingressivegallons'),
+        .withSiteDomain('ingressivegallons1'),
+      new WebPageBuilder()
+        .withEnterUrl('https://ingressive-gallons.000webhostapp.com/italian-daily-newspaper2.php')
+        .withLinksCssSelector('ul div#code a')
+        .withNextLinkCssSelector('')
+        .withSiteDomain('ingressivegallons2'),
     ]
 
     var html = '<h1>NodeGazzettaJumper</h1>'
