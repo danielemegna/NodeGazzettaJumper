@@ -26,6 +26,7 @@ WebPage = function(html, linksCssSelector, nextLinkCssSelector, siteDomain) {
         .text()
         .toLowerCase()
         .replace(/_/g, " ")
+        .replace(/\./g, " ")
 
       return currentTitleLowerCase.indexOf(titleToFind.toLowerCase()) > -1
     }
